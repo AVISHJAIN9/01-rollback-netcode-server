@@ -1,0 +1,100 @@
+=== VERIFICATION RUN ===
+Timestamp: 2026-10-10T17:18:49Z
+
+=== TEST COUNTS (cargo test --list) ===
+Unit tests (--lib):
+      24
+
+Integration tests per file:
+chaos_network_channel:        3
+fuzz_decoder:        1
+golden_test:        1
+integration_2client_udp:        4
+module_isolation_test:        1
+multiprocess_chaos_test:        2
+postgres_redis_integration:        9
+protocol_tests:        9
+session_state_machine_test:       12
+simulation_determinism_test:        6
+transport_protocol_test:       10
+
+Full cargo test run:
+
+running 12 tests
+test test_invalid_capacity ... ok
+test test_ready_up_logic ... ok
+test test_reconnect_token ... ok
+test test_repository_create_and_get ... ok
+test test_cannot_join_in_active_state ... ok
+test test_repository_duplicate_room_code ... ok
+test test_player_join_and_leave ... ok
+test test_inmemory_two_player_session_flow ... ok
+test test_repository_reconnect_tokens ... ok
+test test_session_creation ... ok
+test test_repository_stale_detection ... ok
+test test_state_transitions ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/simulation_determinism_test.rs (target/debug/deps/simulation_determinism_test-bc2ec2e873bc1004)
+
+running 6 tests
+test test_duplicate_input_deduplication ... ok
+test test_forced_desync_detection_and_authoritative_recovery ... ok
+test test_100_percent_snapshot_restore ... ok
+test test_two_peer_convergence_under_network_delay ... ok
+test proptest_simulation_invariants ... ok
+test test_1000_run_randomized_rollback_determinism ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.79s
+
+     Running tests/transport_protocol_test.rs (target/debug/deps/transport_protocol_test-6026b0dc4d10e857)
+
+running 10 tests
+test test_reconnect_token_packet ... ok
+test test_checksum_packet_for_desync_detection ... ok
+test test_handshake_versioning_encode_decode ... ok
+test test_handshake_ack_encode_decode ... ok
+test test_input_frame_with_5frame_redundancy ... ok
+test test_ping_pong_for_clock_sync ... ok
+test test_error_packet_for_version_mismatch ... ok
+test test_all_packet_types_roundtrip ... ok
+test test_snapshot_request_response ... ok
+test test_state_ack_packet ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests rollback_netcode_server
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Summary: passed 80, failed 0, ignored 2, skipped 0
+
+=== GIT DIFF STATS ===
+git diff --shortstat 687d5f4..HEAD:
+ 24 files changed, 4295 insertions(+), 41 deletions(-)
+
+Lines by category (687d5f4..HEAD):
+Category | Files | Added | Deleted
+Rust src | 4 | 4 | 770
+Tests | 2 | 2 | 2
+Docs | 9 | 9 | 2197
+Config & CI | 3 | 3 | 13
+
+=== COMPLETION STATUS ===
+Completed tasks (✅):        5 / 40 (~12%)
+
+=== RELEASE GATES ===
+G1 (Protocol, no silent): ✅ (existing tests)
+G2 (5-frame, redundancy): ✅ (existing tests)
+G3 (Rollback, convergence): ✅ (existing tests)
+G4 (Auth, authz, rate limiting): ⚠️ (auth/authz modules exist, not wired)
+G5 (Chaos, load, DB, degradation): ❌
+G6 (Metrics, dashboards, runbooks): ❌
+G7 (ML, safety): ❌
+G8 (Docs, SDK, replay, release): ❌
+
+=== END VERIFICATION ===
+Output saved to docs/evidence/verify_latest.txt

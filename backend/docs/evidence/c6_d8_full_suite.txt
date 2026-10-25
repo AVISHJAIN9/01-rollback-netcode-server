@@ -1,0 +1,522 @@
+warning: unused variable: `player_id`
+  --> src/session/matchmaking.rs:58:29
+   |
+58 | ...&self, player_id: Uuid) -> R...
+   |           ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_player_id`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rollback-netcode-server` (lib) generated 1 warning (run `cargo fix --lib -p rollback-netcode-server` to apply 1 suggestion)
+warning: field `issued_at` is never read
+  --> tests/../src/session/reconnect.rs:14:9
+   |
+10 | pub struct ReconnectToken {
+   |            -------------- field in this struct
+...
+14 |     pub issued_at: Instant,
+   |         ^^^^^^^^^
+   |
+   = note: `ReconnectToken` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: methods `get_last_tick` and `has_active_token` are never used
+   --> tests/../src/session/reconnect.rs:107:12
+    |
+ 41 | impl ReconnectManager {
+    | --------------------- methods in this implementation
+...
+107 |     pub fn get_last_tick(&self...
+    |            ^^^^^^^^^^^^^
+...
+112 |     pub fn has_active_token(&s...
+    |            ^^^^^^^^^^^^^^^^
+
+warning: `rollback-netcode-server` (test "reconnect_test") generated 2 warnings
+warning: unused import: `uuid::Uuid`
+ --> tests/d3_session_hijack_test.rs:5:5
+  |
+5 | use uuid::Uuid;
+  |     ^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `created_session`
+  --> tests/d5_orphan_cleanup_e2e_test.rs:22:9
+   |
+22 |     let created_session = repo
+   |         ^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_created_session`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable `received_count` is assigned to, but never used
+   --> tests/c6_e2e_udp_test.rs:131:13
+    |
+131 | ...let mut received_count = 0u32;
+    |        ^^^^^^^^^^^^^^^^^^
+    |
+    = note: consider using `_received_count` instead
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: value assigned to `received_count` is never read
+   --> tests/c6_e2e_udp_test.rs:144:33
+    |
+144 | ...   received_count += 1;
+    |       ^^^^^^^^^^^^^^^^^^^
+    |
+    = help: maybe it is overwritten before being read?
+    = note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable `received_count` is assigned to, but never used
+  --> tests/chaos_network_channel.rs:84:9
+   |
+84 |     let mut received_count = 0;
+   |         ^^^^^^^^^^^^^^^^^^
+   |
+   = note: consider using `_received_count` instead
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: value assigned to `received_count` is never read
+   --> tests/chaos_network_channel.rs:101:13
+    |
+101 |             received_count += 1;
+    |             ^^^^^^^^^^^^^^^^^^^
+    |
+    = help: maybe it is overwritten before being read?
+    = note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable `sent_count` is assigned to, but never used
+   --> tests/chaos_network_channel.rs:131:9
+    |
+131 |     let mut sent_count = 0;
+    |         ^^^^^^^^^^^^^^
+    |
+    = note: consider using `_sent_count` instead
+
+warning: value assigned to `sent_count` is never read
+   --> tests/chaos_network_channel.rs:149:13
+    |
+149 |             sent_count += 1;
+    |             ^^^^^^^^^^^^^^^
+    |
+    = help: maybe it is overwritten before being read?
+
+warning: `rollback-netcode-server` (test "d3_session_hijack_test") generated 1 warning (run `cargo fix --test "d3_session_hijack_test" -p rollback-netcode-server` to apply 1 suggestion)
+warning: `rollback-netcode-server` (test "d5_orphan_cleanup_e2e_test") generated 1 warning (run `cargo fix --test "d5_orphan_cleanup_e2e_test" -p rollback-netcode-server` to apply 1 suggestion)
+warning: `rollback-netcode-server` (test "c6_e2e_udp_test") generated 2 warnings
+warning: `rollback-netcode-server` (test "chaos_network_channel") generated 4 warnings
+warning: unused imports: `PlayerId` and `ReconnectToken`
+ --> tests/session_repo_test.rs:2:95
+  |
+2 | ...n, PlayerId, ReconnectToken};
+  |       ^^^^^^^^  ^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rollback-netcode-server` (test "session_repo_test") generated 1 warning (run `cargo fix --test "session_repo_test" -p rollback-netcode-server` to apply 1 suggestion)
+warning: unused variable: `i`
+   --> src/session/matchmaking.rs:109:13
+    |
+109 |         for i in 0..10 {
+    |             ^ help: if this is intentional, prefix it with an underscore: `_i`
+
+warning: `rollback-netcode-server` (lib test) generated 2 warnings (1 duplicate) (run `cargo fix --lib -p rollback-netcode-server --tests` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.46s
+warning: the following packages contain code that will be rejected by a future version of Rust: sqlx-postgres v0.7.4
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 3`
+     Running unittests src/lib.rs (target/debug/deps/rollback_netcode_server-c86dcdec4e204332)
+
+running 48 tests
+test authz::tests::test_admin_can_access_any_session ... ok
+test authz::tests::test_admin_can_kick ... ok
+test authz::tests::test_admin_can_access_admin_panel ... ok
+test authz::tests::test_admin_can_modify_match_result ... ok
+test authz::tests::test_player_cannot_access_admin_panel ... ok
+test authz::tests::test_player_can_access_own_session ... ok
+test auth::tests::test_tampered_token_rejected ... ok
+test authz::tests::test_player_cannot_access_other_session ... ok
+test authz::tests::test_player_cannot_kick ... ok
+test auth::tests::test_wrong_secret_rejects_token ... ok
+test authz::tests::test_player_cannot_modify_match_result ... ok
+test config::tests::test_default_config ... ok
+test auth::tests::test_create_and_validate_token ... ok
+test config::tests::test_invalid_port_rejected ... ok
+test config::tests::test_default_config_is_valid ... ok
+test config::tests::test_invalid_postgres_url_format_rejected ... ok
+test auth::tests::test_revoked_token_rejected ... ok
+test config::tests::test_invalid_reconnect_timeout_rejected ... ok
+test config::tests::test_invalid_redis_url_format_rejected ... ok
+test config::tests::test_invalid_tick_rate_rejected ... ok
+test config::tests::test_missing_postgres_url_rejected ... ok
+test config::tests::test_load_missing_config_returns_defaults ... ok
+test network::drop_model::tests::test_drop_model_0pct_loss ... ok
+test config::tests::test_missing_redis_url_rejected ... ok
+test network::drop_model::tests::test_drop_model_100pct_loss ... ok
+test network::drop_model::tests::test_drop_model_deterministic ... ok
+test network::drop_model::tests::test_drop_model_reset ... ok
+test network::lossy_transport::tests::test_lossy_transport_0pct_loss ... ok
+test network::lossy_transport::tests::test_lossy_transport_100pct_loss ... ok
+test network::lossy_transport::tests::test_lossy_transport_deterministic ... ok
+test network::lossy_transport::tests::test_lossy_transport_reset ... ok
+test network::rate_limiter::tests::test_above_limit_blocked ... ok
+test network::rate_limiter::tests::test_below_limit_allowed ... ok
+test network::rate_limiter::tests::test_independent_ips ... ok
+test network::drop_model::tests::test_drop_model_30pct_loss ... ok
+test protocol::sequence::tests::test_multiple_players_independent ... ok
+test protocol::sequence::tests::test_monotonic_sequence_accepted ... ok
+test protocol::sequence::tests::test_old_sequence_rejected ... ok
+test protocol::sequence::tests::test_replay_rejected ... ok
+test network::lossy_transport::tests::test_lossy_transport_30pct_loss ... ok
+test session::cleanup::tests::test_heartbeat_refresh ... ok
+test session::cleanup::tests::test_active_session_not_stale ... ok
+test session::cleanup::tests::test_mark_stale_after_40s ... ok
+test session::matchmaking::tests::test_inmemory_fifo ... ok
+test session::matchmaking::tests::test_dequeue_maintains_order ... ok
+test session::matchmaking::tests::test_queue_size ... ok
+test session::matchmaking::tests::test_concurrent_enqueue ... ok
+test auth::tests::test_expired_token_rejected ... ok
+
+test result: ok. 48 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/bin/lossy_proxy.rs (target/debug/deps/lossy_proxy-9917458d54fcf39a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/rollback_netcode_server-ba4b3b28fbeac11a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/c6_e2e_udp_test.rs (target/debug/deps/c6_e2e_udp_test-9363be020ef8f2d5)
+
+running 5 tests
+test test_c6_handshake_real_udp ... ok
+test test_c6_desync_detection ... ok
+test test_c6_frame_exchange_100_ticks ... ok
+test test_c6_reconnect_after_disconnect ... ok
+test test_c6_replay_rejection ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.01s
+
+     Running tests/chaos_network_channel.rs (target/debug/deps/chaos_network_channel-e250174ec4f3659d)
+
+running 3 tests
+[2m2026-10-11T05:26:16.600686Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m === Seed Reproducibility Test ===
+[2m2026-10-11T05:26:16.600686Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m === GATE G2: 5-Frame Redundancy Under 30% Loss ===
+[2m2026-10-11T05:26:16.600689Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m === GATE G2: 5-Frame Redundancy, 0% Loss (Control) ===
+[2m2026-10-11T05:26:16.600867Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m Run 1 drops: [1, 2, 5, 15, 20, 22, 24, 27, 30, 39, 40, 46]
+[2m2026-10-11T05:26:16.600886Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m Run 2 drops: [1, 2, 5, 15, 20, 22, 24, 27, 30, 39, 40, 46]
+[2m2026-10-11T05:26:16.600899Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m ✅ Seed reproducibility verified
+test test_chaos_channel_seed_reproducibility ... ok
+[2m2026-10-11T05:26:16.601089Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m Sent: 100, Dropped: 27 (27%), Received: 73 (73%), Effective w/ redundancy: 145.8%
+[2m2026-10-11T05:26:16.601109Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m ✅ Redundancy-aware test: packet recovery with loss demonstrated
+[2m2026-10-11T05:26:16.601106Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m Sent: 100 packets, Received: 100 packets, Loss: 0%
+[2m2026-10-11T05:26:16.601121Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m 🎉 GATE G2: 30% LOSS TEST PASSED (with caveats)
+[2m2026-10-11T05:26:16.601124Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m 🎉 GATE G2: 0% LOSS TEST PASSED
+test test_5frame_redundancy_survives_30pct_loss ... ok
+test test_5frame_redundancy_survives_0pct_loss ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/d1_replay_defense_test.rs (target/debug/deps/d1_replay_defense_test-29663d85784ea7f9)
+
+running 4 tests
+test test_first_frame_accepted ... ok
+test test_multiple_players_independent ... ok
+test test_old_seq_rejected ... ok
+test test_replay_rejected ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/d2_desync_detection_test.rs (target/debug/deps/d2_desync_detection_test-49a6854b4a642476)
+
+running 5 tests
+test test_compute_hash_simple_consistency ... ok
+test test_forged_state_triggers_desync ... ok
+test test_matching_checksums_pass ... ok
+test test_mismatched_checksums_detected ... ok
+test test_unknown_frame_error ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/d3_session_hijack_test.rs (target/debug/deps/d3_session_hijack_test-e61cfe1c2cbb043c)
+
+running 5 tests
+test test_nonexistent_token_rejected ... ok
+test test_valid_token_accepted ... ok
+test test_wrong_player_id_rejected ... ok
+test test_expired_token_rejected ... ok
+test test_multiple_players_independent ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/d4_dos_mitigation_test.rs (target/debug/deps/d4_dos_mitigation_test-2ea351b715d60f44)
+
+running 5 tests
+test test_below_limit_allowed ... ok
+test test_above_limit_blocked ... ok
+test test_burst_rejection ... ok
+test test_different_ips_independent ... ok
+test test_rate_limit_counter ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/d5_orphan_cleanup_e2e_test.rs (target/debug/deps/d5_orphan_cleanup_e2e_test-6c35bfe985de8cd4)
+
+running 4 tests
+test test_stale_sessions_detected ... ok
+test test_heartbeat_refresh_prevents_stale ... ok
+test test_active_sessions_preserved ... ok
+test test_mixed_stale_and_active ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/d6_protocol_version_test.rs (target/debug/deps/d6_protocol_version_test-56f1f3720c8cae20)
+
+running 7 tests
+test test_future_version_rejected ... ok
+test test_negotiation_idempotent ... ok
+test test_v0_9_rejected ... ok
+test test_out_of_range_versions ... ok
+test test_v1_0_accepted ... ok
+test test_v2_0_rejected ... ok
+test test_version_error_message ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/d7_release_build_test.rs (target/debug/deps/d7_release_build_test-284ee89b37f2a53c)
+
+running 2 tests
+test test_release_binary_builds_and_exists ... ignored
+test test_release_binary_is_executable ... ignored
+
+test result: ok. 0 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/d8_m1_integration_test.rs (target/debug/deps/d8_m1_integration_test-f5e5b1459bf206bf)
+
+running 5 tests
+test test_m1_invalid_transitions_rejected ... ok
+test test_m1_orphan_cleanup_during_play ... ok
+test test_m1_disconnect_and_reconnect ... ok
+test test_m1_lobby_to_finished_lifecycle ... ok
+test test_m1_concurrent_sessions ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/feature_flags_test.rs (target/debug/deps/feature_flags_test-4cdbea7ff7f1d2e5)
+
+running 6 tests
+test test_feature_flags_all_flags_exist ... ok
+test test_feature_flags_no_auto_action_on_enable ... ok
+test test_feature_flags_missing_defaults_to_false ... ok
+test test_feature_flags_invalid_type_rejected ... ok
+test test_feature_flags_can_be_enabled ... ok
+test test_feature_flags_default_all_off ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fuzz_decoder.rs (target/debug/deps/fuzz_decoder-1eca4136dfaf54b2)
+
+running 1 test
+test test_10000_packet_decoder_fuzz ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.61s
+
+     Running tests/golden_test.rs (target/debug/deps/golden_test-0cf8ff5c9f24afe3)
+
+running 1 test
+test test_golden_replay_milestones ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/integration_2client_udp.rs (target/debug/deps/integration_2client_udp-3723f203c5795e8a)
+
+running 4 tests
+[2m2026-10-11T05:26:17.284697Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m === GATE G2/G3: InputFrame + StateAck Exchange ===
+[2m2026-10-11T05:26:17.284697Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m === GATE G2/G3: UDP Handshake & Message Exchange ===
+[2m2026-10-11T05:26:17.284697Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m === GATE G1: Version Mismatch Rejection ===
+[2m2026-10-11T05:26:17.284698Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m === GATE G2: 100-Tick Convergence Test ===
+[2m2026-10-11T05:26:17.284776Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Server bound to: 127.0.0.1:61429
+[2m2026-10-11T05:26:17.284805Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Client A bound to: 127.0.0.1:58878
+[2m2026-10-11T05:26:17.285287Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Sent Handshake with version 99.0
+[2m2026-10-11T05:26:17.285296Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Client sent InputFrame with 5-frame redundancy (42 bytes)
+[2m2026-10-11T05:26:17.285309Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Client A sent handshake (8 bytes)
+[2m2026-10-11T05:26:17.285367Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Server received version mismatch attempt from 127.0.0.1:60578
+[2m2026-10-11T05:26:17.285379Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ (Server would send Error 421 in real impl)
+[2m2026-10-11T05:26:17.285382Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Server received handshake from 127.0.0.1:58878
+[2m2026-10-11T05:26:17.285386Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m 🎉 VERSION MISMATCH TEST PASSED
+test test_version_mismatch_rejection ... ok
+[2m2026-10-11T05:26:17.285496Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Server received InputFrame from 127.0.0.1:65493 (42 bytes)
+[2m2026-10-11T05:26:17.285695Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Server sent HandshakeAck (12 bytes)
+[2m2026-10-11T05:26:17.285728Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Server sent StateAck with checksum CDAB8924
+[2m2026-10-11T05:26:17.285764Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Client A received HandshakeAck
+[2m2026-10-11T05:26:17.285774Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m 🎉 UDP HANDSHAKE TEST PASSED
+[2m2026-10-11T05:26:17.285779Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Received checksum bytes: 24 89 AB CD
+[2m2026-10-11T05:26:17.285788Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Expected checksum: CDAB8924, Received: CDAB8924
+[2m2026-10-11T05:26:17.285797Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Client received StateAck with matching checksum CDAB8924
+[2m2026-10-11T05:26:17.285805Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m 🎉 INPUTFRAME + STATEACK TEST PASSED
+test test_2client_udp_handshake_basic ... ok
+test test_2client_input_frame_exchange ... ok
+[2m2026-10-11T05:26:17.304556Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Tick 20: A checksums=20, B checksums=20
+[2m2026-10-11T05:26:17.320028Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Tick 40: A checksums=40, B checksums=40
+[2m2026-10-11T05:26:17.332253Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Tick 60: A checksums=60, B checksums=60
+[2m2026-10-11T05:26:17.344263Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Tick 80: A checksums=80, B checksums=80
+[2m2026-10-11T05:26:17.356038Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Tick 100: A checksums=100, B checksums=100
+[2m2026-10-11T05:26:17.356055Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Final: A=100 checksums, B=100 checksums
+[2m2026-10-11T05:26:17.356063Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m 🎉 100-TICK CONVERGENCE TEST PASSED
+test test_protocol_convergence_100_ticks ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running tests/lobby_test.rs (target/debug/deps/lobby_test-38e3d9f0a18eca7f)
+
+running 8 tests
+test test_create_lobby ... ok
+test test_ready_timeout ... ok
+test test_leave_lobby ... ok
+test test_ready_all ... ok
+test test_idempotent_ready ... ok
+test test_auto_start ... ok
+test test_join_lobby ... ok
+test test_concurrent_joins ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/matchmaking_integration_test.rs (target/debug/deps/matchmaking_integration_test-b2b9706cd65eca7d)
+
+running 4 tests
+test test_inmemory_fifo ... ok
+test test_queue_size ... ok
+test test_dequeue_maintains_order ... ok
+test test_concurrent_enqueue ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/module_isolation_test.rs (target/debug/deps/module_isolation_test-ce9d5521f8ede2c5)
+
+running 1 test
+test test_module_boundary_isolation ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/multiprocess_chaos_test.rs (target/debug/deps/multiprocess_chaos_test-1b1f65782e1b3ea6)
+
+running 2 tests
+test test_multiprocess_udp_0pct_loss ... ok
+test test_multiprocess_udp_30pct_loss ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/postgres_redis_integration.rs (target/debug/deps/postgres_redis_integration-f75f26536be613dc)
+
+running 9 tests
+test test_graceful_degradation_redis_offline ... ok
+test test_redis_ordered_queue_atomic_enqueue ... ok
+test test_redis_concurrent_enqueue_same_player ... ok
+test test_redis_ttl_expiry ... ok
+test test_users_crud_and_constraints ... ok
+test test_sessions_crud_and_heartbeat_orphan_detection ... ok
+test test_migration_from_empty_schema ... ok
+test test_multiple_connections_same_data ... ok
+test test_matches_crud_and_cascade ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.02s
+
+
+========== TEST SUMMARY ==========
+passed 4, skipped 5
+==================================
+
+     Running tests/protocol_tests.rs (target/debug/deps/protocol_tests-b3505fac83ad95a7)
+
+running 9 tests
+test test_magic_and_header_validation ... ok
+test test_oversized_packet_rejection ... ok
+test test_handshake_roundtrip ... ok
+test test_error_and_kick_roundtrip ... ok
+test test_checksum_roundtrip ... ok
+test test_input_frame_roundtrip_with_redundancy ... ok
+test test_version_negotiation_matrix ... ok
+test proptest_input_frame_arbitrary ... ok
+test proptest_fuzz_random_bytes_no_panic ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.63s
+
+     Running tests/reconnect_test.rs (target/debug/deps/reconnect_test-e417259119a10463)
+
+running 5 tests
+test test_wrong_player ... ok
+test test_valid_reconnect ... ok
+test test_wrong_session ... ok
+test test_reused_token ... ok
+test test_expired_token ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/session_repo_test.rs (target/debug/deps/session_repo_test-946677fbb281428b)
+
+running 6 tests
+test test_postgres_heartbeat ... ok
+test test_postgres_crud ... ok
+test test_inmemory_room_code ... ok
+test test_inmemory_crud ... ok
+test test_postgres_room_code ... ok
+test test_inmemory_heartbeat ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/session_state_machine_test.rs (target/debug/deps/session_state_machine_test-3c37f674984d5dd5)
+
+running 12 tests
+test test_invalid_capacity ... ok
+test test_cannot_join_in_active_state ... ok
+test test_player_join_and_leave ... ok
+test test_inmemory_two_player_session_flow ... ok
+test test_reconnect_token ... ok
+test test_ready_up_logic ... ok
+test test_repository_create_and_get ... ok
+test test_repository_duplicate_room_code ... ok
+test test_repository_reconnect_tokens ... ok
+test test_repository_stale_detection ... ok
+test test_session_creation ... ok
+test test_state_transitions ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/simulation_determinism_test.rs (target/debug/deps/simulation_determinism_test-797b4ccf3fb21dee)
+
+running 6 tests
+test test_duplicate_input_deduplication ... ok
+test test_forced_desync_detection_and_authoritative_recovery ... ok
+test test_100_percent_snapshot_restore ... ok
+test test_two_peer_convergence_under_network_delay ... ok
+test proptest_simulation_invariants ... ok
+test test_1000_run_randomized_rollback_determinism ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.84s
+
+     Running tests/transport_protocol_test.rs (target/debug/deps/transport_protocol_test-4383bfec769c24a0)
+
+running 10 tests
+test test_reconnect_token_packet ... ok
+test test_handshake_ack_encode_decode ... ok
+test test_checksum_packet_for_desync_detection ... ok
+test test_handshake_versioning_encode_decode ... ok
+test test_input_frame_with_5frame_redundancy ... ok
+test test_error_packet_for_version_mismatch ... ok
+test test_ping_pong_for_clock_sync ... ok
+test test_all_packet_types_roundtrip ... ok
+test test_snapshot_request_response ... ok
+test test_state_ack_packet ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests rollback_netcode_server
+
+running 1 test
+test src/network/drop_model.rs - network::drop_model::DropModel::new (line 22) ... ignored
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

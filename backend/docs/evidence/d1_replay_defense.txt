@@ -1,0 +1,32 @@
+   Compiling rollback-netcode-server v0.1.0 (/Users/avishjain/avishjain9-repos/01-rollback-netcode-server/backend)
+warning: unused variable: `player_id`
+  --> src/session/matchmaking.rs:58:29
+   |
+58 | ...&self, player_id: Uuid) -> R...
+   |           ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_player_id`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rollback-netcode-server` (lib) generated 1 warning (run `cargo fix --lib -p rollback-netcode-server` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.27s
+warning: the following packages contain code that will be rejected by a future version of Rust: sqlx-postgres v0.7.4
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 3`
+     Running tests/d1_replay_defense_test.rs (target/debug/deps/d1_replay_defense_test-29663d85784ea7f9)
+
+running 4 tests
+✓ Player 0: seq 100 accepted
+✓ Player 1: seq 5 accepted (independent of player 0)
+✓ Player 0: seq 101 accepted
+✓ First frame (seq=1) accepted, last_acked_seq=1
+✓ Player 1: replay of seq 5 correctly rejected
+✓ Seq 1 accepted
+✓ Replay of seq=1 rejected with Replay error
+✓ Seq 5 accepted
+✓ Old seq (3 after 5) rejected with Replay error
+test test_first_frame_accepted ... ok
+test test_multiple_players_independent ... ok
+test test_replay_rejected ... ok
+test test_old_seq_rejected ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

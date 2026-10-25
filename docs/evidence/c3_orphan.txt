@@ -1,0 +1,7 @@
+running 3 tests
+test session::cleanup::tests::test_heartbeat_refresh ... ok
+test session::cleanup::tests::test_mark_stale_after_40s ... ok
+test session::cleanup::tests::test_active_session_not_stale ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 34 filtered out; finished in 0.00s
+

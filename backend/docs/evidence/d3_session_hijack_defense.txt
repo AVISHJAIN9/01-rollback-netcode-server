@@ -1,0 +1,42 @@
+   Compiling rollback-netcode-server v0.1.0 (/Users/avishjain/avishjain9-repos/01-rollback-netcode-server/backend)
+warning: unused variable: `player_id`
+  --> src/session/matchmaking.rs:58:29
+   |
+58 | ...&self, player_id: Uuid) -> R...
+   |           ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_player_id`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rollback-netcode-server` (lib) generated 1 warning (run `cargo fix --lib -p rollback-netcode-server` to apply 1 suggestion)
+warning: unused import: `uuid::Uuid`
+ --> tests/d3_session_hijack_test.rs:5:5
+  |
+5 | use uuid::Uuid;
+  |     ^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rollback-netcode-server` (test "d3_session_hijack_test") generated 1 warning (run `cargo fix --test "d3_session_hijack_test" -p rollback-netcode-server` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.71s
+warning: the following packages contain code that will be rejected by a future version of Rust: sqlx-postgres v0.7.4
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 3`
+     Running tests/d3_session_hijack_test.rs (target/debug/deps/d3_session_hijack_test-e61cfe1c2cbb043c)
+
+running 5 tests
+✓ Nonexistent token correctly rejected
+✓ Token stored for player1
+✓ Token validation correctly rejected for wrong player_id
+✓ Both tokens stored
+✓ Token stored for player1
+✓ Multiple player tokens correctly isolated
+✓ Expired token stored
+✓ Expired token correctly rejected
+✓ Valid token with correct player_id accepted
+test test_nonexistent_token_rejected ... ok
+test test_wrong_player_id_rejected ... ok
+test test_multiple_players_independent ... ok
+test test_expired_token_rejected ... ok
+test test_valid_token_accepted ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

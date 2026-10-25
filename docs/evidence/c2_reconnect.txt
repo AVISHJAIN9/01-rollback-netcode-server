@@ -1,0 +1,34 @@
+warning: field `issued_at` is never read
+  --> tests/../src/session/reconnect.rs:14:9
+   |
+10 | pub struct ReconnectToken {
+   |            -------------- field in this struct
+...
+14 |     pub issued_at: Instant,
+   |         ^^^^^^^^^
+   |
+   = note: `ReconnectToken` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+warning: methods `get_last_tick` and `has_active_token` are never used
+  --> tests/../src/session/reconnect.rs:107:12
+   |
+ 41 | impl ReconnectManager {
+   | --------------------- methods in this implementation
+...
+107 |     pub fn get_last_tick(&self, player_id: &str) -> Option<u64> {
+   |            ^^^^^^^^^^^^^
+...
+112 |     pub fn has_active_token(&self, token_str: &str) -> bool {
+   |            ^^^^^^^^^^^^^^^^
+warning: `rollback-netcode-server` (test "reconnect_test") generated 2 warnings
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.21s
+warning: the following packages contain code that will be rejected by a future version of Rust: sqlx-postgres v0.7.4
+note: to see what the problems were, use the option `--future-incompat-report`, or or run `cargo report future-incompatibilities --id 3`
+     Running tests/reconnect_test.rs (target/debug/deps/reconnect_test-e417259119a10463)
+running 5 tests
+test test_wrong_session ... ok
+test test_wrong_player ... ok
+test test_reused_token ... ok
+test test_valid_reconnect ... ok
+test test_expired_token ... ok
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

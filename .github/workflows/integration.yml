@@ -1,0 +1,80 @@
+name: Integration Tests (Postgres + Redis)
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - 'feat/**'
+  pull_request:
+
+jobs:
+  integration-postgres-redis:
+    name: Integration Tests with Real Services
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgrespassword
+          POSTGRES_DB: rollback_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+      
+      redis:
+        image: redis:7.2-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      
+      - name: Cache cargo registry
+        uses: actions/cache@v3
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
+      
+      - name: Cache cargo index
+        uses: actions/cache@v3
+        with:
+          path: ~/.cargo/git
+          key: ${{ runner.os }}-cargo-git-${{ hashFiles('**/Cargo.lock') }}
+      
+      - name: Cache cargo build
+        uses: actions/cache@v3
+        with:
+          path: backend/target
+          key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
+      
+      - name: Build integration tests
+        working-directory: backend
+        run: cargo test --test postgres_redis_integration --no-run
+      
+      - name: Run integration tests (fail-loud: zero skips)
+        working-directory: backend
+        env:
+          ALLOW_SKIP_INTEGRATION: "0"
+        run: |
+          cargo test --test postgres_redis_integration -- --nocapture --test-threads=1
+          # Verify that we got "skipped 0" in output
+          cargo test --test postgres_redis_integration -- --nocapture --test-threads=1 2>&1 | grep -E "passed.*skipped 0" || {
+            echo "ERROR: Integration tests were skipped when services were available"
+            exit 1
+          }

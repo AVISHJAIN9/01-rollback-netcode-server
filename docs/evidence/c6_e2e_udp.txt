@@ -1,0 +1,103 @@
+warning: unused variable: `player_id`
+  --> src/session/matchmaking.rs:58:29
+   |
+58 | ...&self, player_id: Uuid) -> R...
+   |           ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_player_id`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rollback-netcode-server` (lib) generated 1 warning (run `cargo fix --lib -p rollback-netcode-server` to apply 1 suggestion)
+warning: unused variable: `i`
+   --> src/session/matchmaking.rs:109:13
+    |
+109 |         for i in 0..10 {
+    |             ^ help: if this is intentional, prefix it with an underscore: `_i`
+
+warning: variable `received_count` is assigned to, but never used
+   --> tests/c6_e2e_udp_test.rs:131:13
+    |
+131 | ...let mut received_count = 0u32;
+    |        ^^^^^^^^^^^^^^^^^^
+    |
+    = note: consider using `_received_count` instead
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: value assigned to `received_count` is never read
+   --> tests/c6_e2e_udp_test.rs:144:33
+    |
+144 | ...   received_count += 1;
+    |       ^^^^^^^^^^^^^^^^^^^
+    |
+    = help: maybe it is overwritten before being read?
+    = note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rollback-netcode-server` (lib test) generated 2 warnings (1 duplicate) (run `cargo fix --lib -p rollback-netcode-server --tests` to apply 1 suggestion)
+warning: `rollback-netcode-server` (test "c6_e2e_udp_test") generated 2 warnings
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.55s
+warning: the following packages contain code that will be rejected by a future version of Rust: sqlx-postgres v0.7.4
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 3`
+     Running unittests src/lib.rs (target/debug/deps/rollback_netcode_server-c86dcdec4e204332)
+
+running 48 tests
+test authz::tests::test_admin_can_access_any_session ... ok
+test authz::tests::test_admin_can_access_admin_panel ... ok
+test authz::tests::test_admin_can_kick ... ok
+test authz::tests::test_admin_can_modify_match_result ... ok
+test authz::tests::test_player_can_access_own_session ... ok
+test authz::tests::test_player_cannot_access_admin_panel ... ok
+test authz::tests::test_player_cannot_access_other_session ... ok
+test authz::tests::test_player_cannot_kick ... ok
+test authz::tests::test_player_cannot_modify_match_result ... ok
+test config::tests::test_default_config ... ok
+test config::tests::test_invalid_port_rejected ... ok
+test config::tests::test_default_config_is_valid ... ok
+test config::tests::test_invalid_reconnect_timeout_rejected ... ok
+test config::tests::test_invalid_tick_rate_rejected ... ok
+test config::tests::test_invalid_postgres_url_format_rejected ... ok
+test config::tests::test_invalid_redis_url_format_rejected ... ok
+test config::tests::test_missing_postgres_url_rejected ... ok
+test config::tests::test_missing_redis_url_rejected ... ok
+test network::drop_model::tests::test_drop_model_0pct_loss ... ok
+test network::drop_model::tests::test_drop_model_100pct_loss ... ok
+test config::tests::test_load_missing_config_returns_defaults ... ok
+test network::drop_model::tests::test_drop_model_deterministic ... ok
+test network::drop_model::tests::test_drop_model_reset ... ok
+test network::lossy_transport::tests::test_lossy_transport_0pct_loss ... ok
+test network::lossy_transport::tests::test_lossy_transport_100pct_loss ... ok
+test network::drop_model::tests::test_drop_model_30pct_loss ... ok
+test network::lossy_transport::tests::test_lossy_transport_deterministic ... ok
+test network::lossy_transport::tests::test_lossy_transport_reset ... ok
+test network::lossy_transport::tests::test_lossy_transport_30pct_loss ... ok
+test network::rate_limiter::tests::test_below_limit_allowed ... ok
+test network::rate_limiter::tests::test_independent_ips ... ok
+test network::rate_limiter::tests::test_above_limit_blocked ... ok
+test protocol::sequence::tests::test_monotonic_sequence_accepted ... ok
+test protocol::sequence::tests::test_multiple_players_independent ... ok
+test protocol::sequence::tests::test_old_sequence_rejected ... ok
+test protocol::sequence::tests::test_replay_rejected ... ok
+test session::cleanup::tests::test_active_session_not_stale ... ok
+test session::cleanup::tests::test_heartbeat_refresh ... ok
+test auth::tests::test_tampered_token_rejected ... ok
+test auth::tests::test_create_and_validate_token ... ok
+test session::cleanup::tests::test_mark_stale_after_40s ... ok
+test auth::tests::test_wrong_secret_rejects_token ... ok
+test session::matchmaking::tests::test_dequeue_maintains_order ... ok
+test session::matchmaking::tests::test_inmemory_fifo ... ok
+test session::matchmaking::tests::test_concurrent_enqueue ... ok
+test session::matchmaking::tests::test_queue_size ... ok
+test auth::tests::test_revoked_token_rejected ... ok
+test auth::tests::test_expired_token_rejected ... ok
+
+test result: ok. 48 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/c6_e2e_udp_test.rs (target/debug/deps/c6_e2e_udp_test-9363be020ef8f2d5)
+
+running 5 tests
+test test_c6_handshake_real_udp ... ok
+test test_c6_desync_detection ... ok
+test test_c6_frame_exchange_100_ticks ... ok
+test test_c6_reconnect_after_disconnect ... ok
+test test_c6_replay_rejection ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.01s
+

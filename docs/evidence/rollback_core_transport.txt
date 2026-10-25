@@ -1,0 +1,19 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.61s
+warning: the following packages contain code that will be rejected by a future version of Rust: sqlx-postgres v0.7.4
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 3`
+     Running tests/transport_protocol_test.rs (target/debug/deps/transport_protocol_test-6026b0dc4d10e857)
+
+running 10 tests
+test test_reconnect_token_packet ... ok
+test test_checksum_packet_for_desync_detection ... ok
+test test_handshake_ack_encode_decode ... ok
+test test_error_packet_for_version_mismatch ... ok
+test test_handshake_versioning_encode_decode ... ok
+test test_ping_pong_for_clock_sync ... ok
+test test_all_packet_types_roundtrip ... ok
+test test_input_frame_with_5frame_redundancy ... ok
+test test_snapshot_request_response ... ok
+test test_state_ack_packet ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

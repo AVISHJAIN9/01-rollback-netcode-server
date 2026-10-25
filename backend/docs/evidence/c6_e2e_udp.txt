@@ -1,0 +1,52 @@
+warning: unused variable: `player_id`
+  --> src/session/matchmaking.rs:58:29
+   |
+58 | ...&self, player_id: Uuid) -> R...
+   |           ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_player_id`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rollback-netcode-server` (lib) generated 1 warning (run `cargo fix --lib -p rollback-netcode-server` to apply 1 suggestion)
+   Compiling rollback-netcode-server v0.1.0 (/Users/avishjain/avishjain9-repos/01-rollback-netcode-server/backend)
+warning: variable `received_count` is assigned to, but never used
+   --> tests/c6_e2e_udp_test.rs:131:13
+    |
+131 | ...let mut received_count = 0u32;
+    |        ^^^^^^^^^^^^^^^^^^
+    |
+    = note: consider using `_received_count` instead
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: value assigned to `received_count` is never read
+   --> tests/c6_e2e_udp_test.rs:144:33
+    |
+144 | ...   received_count += 1;
+    |       ^^^^^^^^^^^^^^^^^^^
+    |
+    = help: maybe it is overwritten before being read?
+    = note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rollback-netcode-server` (test "c6_e2e_udp_test") generated 2 warnings
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.10s
+warning: the following packages contain code that will be rejected by a future version of Rust: sqlx-postgres v0.7.4
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 3`
+     Running tests/c6_e2e_udp_test.rs (target/debug/deps/c6_e2e_udp_test-9363be020ef8f2d5)
+
+running 5 tests
+Client sent Handshake
+Server received: Handshake { client_version: 1, capabilities: 1, session_token: [66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66] }
+Client received: HandshakeAck { negotiated_version: 1, player_id: 0, tick_rate: 60, assigned_token: [171, 171, 171, 171, 171, 171, 171, 171, 171, 171, 171, 171, 171, 171, 171, 171] }
+✓ Handshake test passed
+test test_c6_handshake_real_udp ... ok
+Rejected replay: seq 2 <= 5
+✓ Desync detection test passed (server final checksum: 0x4b740702)
+test test_c6_desync_detection ... ok
+✓ 100-tick exchange passed: final checksum = 0x695e3e40
+test test_c6_frame_exchange_100_ticks ... ok
+✓ Reconnect test passed: 20 ticks processed, final checksum 0x9a051940
+test test_c6_reconnect_after_disconnect ... ok
+✓ Replay rejection test passed (1 replays rejected)
+test test_c6_replay_rejection ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.01s
+

@@ -1,0 +1,67 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.41s
+     Running unittests src/lib.rs (backend/target/debug/deps/rollback_netcode_server-fad6bdd23b606b92)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (backend/target/debug/deps/rollback_netcode_server-7239e09b0a656574)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fuzz_decoder.rs (backend/target/debug/deps/fuzz_decoder-5241cdf95c842f7f)
+
+running 1 test
+test test_10000_packet_decoder_fuzz ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.37s
+
+     Running tests/golden_test.rs (backend/target/debug/deps/golden_test-eccf77083c4cd09f)
+
+running 1 test
+test test_golden_replay_milestones ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/module_isolation_test.rs (backend/target/debug/deps/module_isolation_test-d642dc653ba65001)
+
+running 1 test
+test test_module_boundary_isolation ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/protocol_tests.rs (backend/target/debug/deps/protocol_tests-208b0dea306ce3ab)
+
+running 9 tests
+test test_magic_and_header_validation ... ok
+test test_error_and_kick_roundtrip ... ok
+test test_checksum_roundtrip ... ok
+test test_oversized_packet_rejection ... ok
+test test_input_frame_roundtrip_with_redundancy ... ok
+test test_version_negotiation_matrix ... ok
+test test_handshake_roundtrip ... ok
+test proptest_input_frame_arbitrary ... ok
+test proptest_fuzz_random_bytes_no_panic ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.34s
+
+     Running tests/simulation_determinism_test.rs (backend/target/debug/deps/simulation_determinism_test-bf89d13e74859ee8)
+
+running 6 tests
+test test_duplicate_input_deduplication ... ok
+test test_forced_desync_detection_and_authoritative_recovery ... ok
+test test_100_percent_snapshot_restore ... ok
+test test_two_peer_convergence_under_network_delay ... ok
+test proptest_simulation_invariants ... ok
+test test_1000_run_randomized_rollback_determinism ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.27s
+
+   Doc-tests rollback_netcode_server
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

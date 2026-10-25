@@ -1,0 +1,29 @@
+[package]
+name = "mini_quic_engine_core"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "Production-grade Mini-QUIC transport engine (RFC 9000 & RFC 9002)"
+repository = "https://github.com/avishjain/mini_quic"
+authors = ["QUIC Engineers"]
+
+[lib]
+name = "mini_quic_engine_core"
+path = "src/lib.rs"
+
+[[test]]
+name = "transport_engine_tests"
+path = "tests/transport_engine_tests.rs"
+
+[dependencies]
+tokio = { version = "1.35", features = ["full"] }
+async-trait = "0.1"
+rand = "0.8"
+
+[dev-dependencies]
+tokio = { version = "1.35", features = ["full"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1

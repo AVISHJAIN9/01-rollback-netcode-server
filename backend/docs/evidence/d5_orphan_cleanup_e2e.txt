@@ -1,0 +1,45 @@
+warning: unused variable: `player_id`
+  --> src/session/matchmaking.rs:58:29
+   |
+58 | ...&self, player_id: Uuid) -> R...
+   |           ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_player_id`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rollback-netcode-server` (lib) generated 1 warning (run `cargo fix --lib -p rollback-netcode-server` to apply 1 suggestion)
+   Compiling rollback-netcode-server v0.1.0 (/Users/avishjain/avishjain9-repos/01-rollback-netcode-server/backend)
+warning: unused variable: `created_session`
+  --> tests/d5_orphan_cleanup_e2e_test.rs:22:9
+   |
+22 |     let created_session = repo
+   |         ^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_created_session`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rollback-netcode-server` (test "d5_orphan_cleanup_e2e_test") generated 1 warning (run `cargo fix --test "d5_orphan_cleanup_e2e_test" -p rollback-netcode-server` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.91s
+warning: the following packages contain code that will be rejected by a future version of Rust: sqlx-postgres v0.7.4
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 3`
+     Running tests/d5_orphan_cleanup_e2e_test.rs (target/debug/deps/d5_orphan_cleanup_e2e_test-6c35bfe985de8cd4)
+
+running 4 tests
+✓ Session created: c25d6d43-7f74-4b59-ae2f-39e0917c64a8
+✓ Session set to stale (50s old)
+✓ Set heartbeat to 41 seconds in the past
+✓ Confirmed session is stale
+✓ Heartbeat sent
+✓ Stale session correctly detected by find_stale(40)
+✓ Session correctly no longer marked as stale after heartbeat
+✓ Created 3 active sessions
+✓ Created 3 sessions
+✓ Heartbeated all sessions
+✓ Active sessions correctly not detected as stale
+✓ Session 0 stale, sessions 1-2 fresh
+✓ Correctly identified 1 stale and 2 active sessions
+test test_stale_sessions_detected ... ok
+test test_heartbeat_refresh_prevents_stale ... ok
+test test_active_sessions_preserved ... ok
+test test_mixed_stale_and_active ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

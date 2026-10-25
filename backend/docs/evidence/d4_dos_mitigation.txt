@@ -1,0 +1,29 @@
+   Compiling rollback-netcode-server v0.1.0 (/Users/avishjain/avishjain9-repos/01-rollback-netcode-server/backend)
+warning: unused variable: `player_id`
+  --> src/session/matchmaking.rs:58:29
+   |
+58 | ...&self, player_id: Uuid) -> R...
+   |           ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_player_id`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rollback-netcode-server` (lib) generated 1 warning (run `cargo fix --lib -p rollback-netcode-server` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.08s
+warning: the following packages contain code that will be rejected by a future version of Rust: sqlx-postgres v0.7.4
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 3`
+     Running tests/d4_dos_mitigation_test.rs (target/debug/deps/d4_dos_mitigation_test-2ea351b715d60f44)
+
+running 5 tests
+✓ 5 requests below limit of 10 all allowed
+✓ 11th request correctly blocked when limit is 10
+✓ Rate limit counter accurately tracks handshake count
+✓ Burst attack: 3 allowed, 8 blocked
+✓ Different IPs correctly have independent limits
+test test_below_limit_allowed ... ok
+test test_above_limit_blocked ... ok
+test test_burst_rejection ... ok
+test test_rate_limit_counter ... ok
+test test_different_ips_independent ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

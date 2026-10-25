@@ -1,0 +1,33 @@
+   Compiling rollback-netcode-server v0.1.0 (/Users/avishjain/avishjain9-repos/01-rollback-netcode-server/backend)
+warning: unused variable: `player_id`
+  --> src/session/matchmaking.rs:58:29
+   |
+58 | ...&self, player_id: Uuid) -> R...
+   |           ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_player_id`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rollback-netcode-server` (lib) generated 1 warning (run `cargo fix --lib -p rollback-netcode-server` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.78s
+warning: the following packages contain code that will be rejected by a future version of Rust: sqlx-postgres v0.7.4
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 3`
+     Running tests/d2_desync_detection_test.rs (target/debug/deps/d2_desync_detection_test-49a6854b4a642476)
+
+running 5 tests
+✓ Unknown frame correctly returned FrameNotFound error
+✓ Hash computation is deterministic and sensitive to data changes
+  Hash(data1) = 0xf0c03
+  Hash(data3) = 0xf0c04
+✓ Checksum mismatch correctly detected
+✓ Recorded 5 authoritative checksums
+✓ All matching checksums validated successfully
+test test_unknown_frame_error ... ok
+test test_mismatched_checksums_detected ... ok
+✓ Recorded checksums for frames 1-10
+✓ Forged state at frame 7 detected as DesyncError::ChecksumMismatch
+test test_matching_checksums_pass ... ok
+test test_compute_hash_simple_consistency ... ok
+test test_forged_state_triggers_desync ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

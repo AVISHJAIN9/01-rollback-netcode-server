@@ -1,0 +1,9 @@
+{"experiment_id": "exp_1790782199633", "experiment_name": "kalman_delay_opt", "timestamp": 1790782199.633556, "params": {"r": 0.05, "q": 0.001}, "metrics": {"mae": 0.12064501698755471}}
+{"experiment_id": "exp_1790782210758", "experiment_name": "kalman_delay_opt", "timestamp": 1790782210.7588859, "params": {"r": 0.05, "q": 0.001}, "metrics": {"mae": 0.12064501698755471}}
+{"experiment_id": "exp_1791641998434", "experiment_name": "kalman_delay_opt", "timestamp": 1791641998.434092, "params": {"r": 0.05, "q": 0.001}, "metrics": {"mae": 0.12064501698755471}}
+{"experiment_id": "exp_1791643009422", "experiment_name": "kalman_delay_opt", "timestamp": 1791643009.422136, "params": {"r": 0.05, "q": 0.001}, "metrics": {"mae": 0.12064501698755471}}
+{"experiment_id": "exp_1791643345129", "experiment_name": "kalman_delay_opt", "timestamp": 1791643345.129984, "params": {"r": 0.05, "q": 0.001}, "metrics": {"mae": 0.12064501698755471}}
+{"experiment_id": "exp_1791643910424", "experiment_name": "kalman_delay_opt", "timestamp": 1791643910.424692, "params": {"r": 0.05, "q": 0.001}, "metrics": {"mae": 0.12064501698755471}}
+{"experiment_id": "exp_1791643931800", "experiment_name": "kalman_delay_opt", "timestamp": 1791643931.800407, "params": {"r": 0.05, "q": 0.001}, "metrics": {"mae": 0.12064501698755471}}
+{"experiment_id": "exp_1791691165068", "experiment_name": "kalman_delay_opt", "timestamp": 1791691165.0683231, "params": {"r": 0.05, "q": 0.001}, "metrics": {"mae": 0.12064501698755471}}
+{"experiment_id": "exp_1791691203454", "experiment_name": "kalman_delay_opt", "timestamp": 1791691203.4549508, "params": {"r": 0.05, "q": 0.001}, "metrics": {"mae": 0.12064501698755471}}

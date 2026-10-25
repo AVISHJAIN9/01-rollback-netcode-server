@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rollback-netcode-server
+  labels:
+    app: rollback-netcode
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rollback-netcode
+  template:
+    metadata:
+      labels:
+        app: rollback-netcode
+    spec:
+      containers:
+      - name: game-server
+        image: rollback-netcode-server:latest
+        ports:
+        - containerPort: 9000
+          protocol: UDP
+          name: game-udp
+        - containerPort: 8080
+          protocol: TCP
+          name: http-api

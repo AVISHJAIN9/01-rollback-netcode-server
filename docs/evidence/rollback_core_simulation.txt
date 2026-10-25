@@ -1,0 +1,15 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.64s
+warning: the following packages contain code that will be rejected by a future version of Rust: sqlx-postgres v0.7.4
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 3`
+     Running tests/simulation_determinism_test.rs (target/debug/deps/simulation_determinism_test-bc2ec2e873bc1004)
+
+running 6 tests
+test test_duplicate_input_deduplication ... ok
+test test_forced_desync_detection_and_authoritative_recovery ... ok
+test test_100_percent_snapshot_restore ... ok
+test test_two_peer_convergence_under_network_delay ... ok
+test proptest_simulation_invariants ... ok
+test test_1000_run_randomized_rollback_determinism ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.80s
+

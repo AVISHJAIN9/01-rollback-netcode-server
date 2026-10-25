@@ -1,0 +1,38 @@
+
+> rollback-netcode-frontend@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.35
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/12) ...
+   Generating static pages (3/12) 
+   Generating static pages (6/12) 
+   Generating static pages (9/12) 
+ ✓ Generating static pages (12/12)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    175 B          96.1 kB
+├ ○ /_not-found                          873 B          88.1 kB
+├ ○ /admin                               1.92 kB        89.2 kB
+├ ○ /ai-insights                         142 B          87.4 kB
+├ ƒ /api/explain-desync                  0 B                0 B
+├ ○ /arena                               6.12 kB        93.4 kB
+├ ○ /connect                             1.97 kB        97.9 kB
+├ ○ /dashboard                           142 B          87.4 kB
+├ ○ /lobby                               1.82 kB        97.8 kB
+└ ○ /settings                            1.59 kB        88.9 kB
++ First Load JS shared by all            87.3 kB
+  ├ chunks/117-a555172fb8d682dd.js       31.7 kB
+  ├ chunks/fd9d1056-0807e69ea9c303ac.js  53.6 kB
+  └ other shared chunks (total)          1.89 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

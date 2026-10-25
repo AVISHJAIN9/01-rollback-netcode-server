@@ -1,0 +1,53 @@
+   Compiling rollback-netcode-server v0.1.0 (/Users/avishjain/avishjain9-repos/01-rollback-netcode-server/backend)
+warning: unused variable: `player_id`
+  --> src/session/matchmaking.rs:58:29
+   |
+58 | ...&self, player_id: Uuid) -> R...
+   |           ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_player_id`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rollback-netcode-server` (lib) generated 1 warning (run `cargo fix --lib -p rollback-netcode-server` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.06s
+warning: the following packages contain code that will be rejected by a future version of Rust: sqlx-postgres v0.7.4
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 3`
+     Running tests/d8_m1_integration_test.rs (target/debug/deps/d8_m1_integration_test-f5e5b1459bf206bf)
+
+running 5 tests
+✓ Session created in Lobby state: ae357b2f-44f1-4a8d-9234-b5143633b481
+✓ Both players joined
+✓ Transitioned to Ready
+✓ Transitioned to Active (game running)
+✓ Session active, starting at tick 0
+✓ Session in Lobby state
+✓ Invalid transition (Lobby -> Active) correctly rejected
+✓ Invalid transition (Lobby -> Finished) correctly rejected
+✓ State machine enforces valid transitions
+  ✓ Tick 5
+✓ Created 3 sessions
+  ✓ Tick 10
+✓ Processed 10 ticks
+✓ Player1 disconnected at tick 10
+  ✓ Tick 15
+✓ Reconnect token validated for player1
+✓ Session resumed at tick 11
+✓ Session 0 marked stale (50s old)
+✓ Sessions 1 and 2 kept fresh
+  ✓ Tick 20
+✓ Processed 20 game ticks
+✓ Transitioned to Finished
+✓ Orphan cleanup scan complete: found 1 stale sessions
+✓ Cleanup correctly identified stale vs active sessions
+✓ Happy path lifecycle complete
+✓ Processed 10 more ticks (11-20)
+✓ Created 5 concurrent sessions
+✓ Concurrent session creation works correctly
+✓ Disconnect and reconnect complete
+test test_m1_invalid_transitions_rejected ... ok
+test test_m1_lobby_to_finished_lifecycle ... ok
+test test_m1_concurrent_sessions ... ok
+test test_m1_orphan_cleanup_during_play ... ok
+test test_m1_disconnect_and_reconnect ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

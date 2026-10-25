@@ -1,0 +1,5 @@
+[*] Running 1,000,000 Step Cross-Instance Determinism Verification (TEST-DET-01)...
+[+] Completed 1,000,000 frames in 0.997s (1,003,099 frames/sec)
+[+] Final Checksum Instance 1: A2D4B4D0
+[+] Final Checksum Instance 2: A2D4B4D0
+[SUCCESS] 100% BIT-EXACT DETERMINISM VERIFIED across 1,000,000 frames.

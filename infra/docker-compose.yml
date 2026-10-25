@@ -1,0 +1,93 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: rollback-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: rollback_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d rollback_db"]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - rollback-network
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: rollback-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - rollback-network
+    command: redis-server --appendonly yes --appendfsync everysec
+
+  backend:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.backend
+    container_name: rollback-backend
+    ports:
+      - "7777:7777/udp"
+      - "8080:8080"
+    environment:
+      # Config overrides (env takes precedence over config.toml)
+      ROLLBACK_POSTGRES_URL: "postgres://postgres:postgrespassword@postgres:5432/rollback_db"
+      ROLLBACK_REDIS_URL: "redis://redis:6379/0"
+      ROLLBACK_TICK_RATE: "60"
+      ROLLBACK_RECONNECT_TIMEOUT_SECS: "30"
+      ROLLBACK_STALE_SESSION_THRESHOLD_SECS: "40"
+      ROLLBACK_UDP_GAME_PORT: "7777"
+      ROLLBACK_HTTP_ADMIN_PORT: "8080"
+      # Feature flags (all default false)
+      ROLLBACK_ENABLE_AI_CHEAT_DETECTION: "0"
+      ROLLBACK_ENABLE_JITTER_PREDICTION: "0"
+      ROLLBACK_ENABLE_ROLLBACK_RISK_METRICS: "0"
+      ROLLBACK_ENABLE_MATCHMAKING_OPTIMIZER: "0"
+      # Logging
+      RUST_LOG: "rollback_netcode_server=info,warn"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - rollback-network
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.frontend
+    container_name: rollback-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_URL: "http://localhost:8080"
+      REACT_APP_WS_URL: "ws://localhost:8080"
+    depends_on:
+      backend:
+        condition: service_started
+    networks:
+      - rollback-network
+
+volumes:
+  pgdata:
+    driver: local
+
+networks:
+  rollback-network:
+    driver: bridge

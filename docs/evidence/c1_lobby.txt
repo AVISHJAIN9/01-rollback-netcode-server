@@ -1,0 +1,255 @@
+warning: variable `received_count` is assigned to, but never used
+  --> tests/chaos_network_channel.rs:84:9
+   |
+84 |     let mut received_count = 0;
+   |         ^^^^^^^^^^^^^^^^^^
+   |
+   = note: consider using `_received_count` instead
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: value assigned to `received_count` is never read
+   --> tests/chaos_network_channel.rs:101:13
+    |
+101 |             received_count += 1;
+    |             ^^^^^^^^^^^^^^^^^^^
+    |
+    = help: maybe it is overwritten before being read?
+    = note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable `sent_count` is assigned to, but never used
+   --> tests/chaos_network_channel.rs:131:9
+    |
+131 |     let mut sent_count = 0;
+    |         ^^^^^^^^^^^^^^
+    |
+    = note: consider using `_sent_count` instead
+
+warning: value assigned to `sent_count` is never read
+   --> tests/chaos_network_channel.rs:149:13
+    |
+149 |             sent_count += 1;
+    |             ^^^^^^^^^^^^^^^
+    |
+    = help: maybe it is overwritten before being read?
+
+warning: `rollback-netcode-server` (test "chaos_network_channel") generated 4 warnings
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.54s
+warning: the following packages contain code that will be rejected by a future version of Rust: sqlx-postgres v0.7.4
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 3`
+     Running unittests src/lib.rs (target/debug/deps/rollback_netcode_server-c86dcdec4e204332)
+
+running 34 tests
+test authz::tests::test_admin_can_access_any_session ... ok
+test authz::tests::test_admin_can_access_admin_panel ... ok
+test authz::tests::test_admin_can_kick ... ok
+test authz::tests::test_admin_can_modify_match_result ... ok
+test authz::tests::test_player_can_access_own_session ... ok
+test authz::tests::test_player_cannot_access_admin_panel ... ok
+test authz::tests::test_player_cannot_access_other_session ... ok
+test authz::tests::test_player_cannot_kick ... ok
+test authz::tests::test_player_cannot_modify_match_result ... ok
+test config::tests::test_default_config ... ok
+test config::tests::test_invalid_port_rejected ... ok
+test config::tests::test_default_config_is_valid ... ok
+test config::tests::test_invalid_reconnect_timeout_rejected ... ok
+test config::tests::test_invalid_tick_rate_rejected ... ok
+test config::tests::test_invalid_postgres_url_format_rejected ... ok
+test config::tests::test_invalid_redis_url_format_rejected ... ok
+test auth::tests::test_tampered_token_rejected ... ok
+test auth::tests::test_wrong_secret_rejects_token ... ok
+test auth::tests::test_create_and_validate_token ... ok
+test config::tests::test_missing_postgres_url_rejected ... ok
+test config::tests::test_missing_redis_url_rejected ... ok
+test config::tests::test_load_missing_config_returns_defaults ... ok
+test network::drop_model::tests::test_drop_model_0pct_loss ... ok
+test network::drop_model::tests::test_drop_model_100pct_loss ... ok
+test network::drop_model::tests::test_drop_model_deterministic ... ok
+test auth::tests::test_revoked_token_rejected ... ok
+test network::drop_model::tests::test_drop_model_reset ... ok
+test network::lossy_transport::tests::test_lossy_transport_100pct_loss ... ok
+test network::lossy_transport::tests::test_lossy_transport_0pct_loss ... ok
+test network::lossy_transport::tests::test_lossy_transport_deterministic ... ok
+test network::lossy_transport::tests::test_lossy_transport_reset ... ok
+test network::drop_model::tests::test_drop_model_30pct_loss ... ok
+test network::lossy_transport::tests::test_lossy_transport_30pct_loss ... ok
+test auth::tests::test_expired_token_rejected ... ok
+
+test result: ok. 34 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running unittests src/main.rs (target/debug/deps/rollback_netcode_server-ba4b3b28fbeac11a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/chaos_network_channel.rs (target/debug/deps/chaos_network_channel-fabaa583ffeccf0e)
+
+running 3 tests
+[2m2026-10-11T04:11:49.221451Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m === Seed Reproducibility Test ===
+[2m2026-10-11T04:11:49.221453Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m === GATE G2: 5-Frame Redundancy Under 30% Loss ===
+[2m2026-10-11T04:11:49.221457Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m === GATE G2: 5-Frame Redundancy, 0% Loss (Control) ===
+[2m2026-10-11T04:11:49.221508Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m Run 1 drops: [1, 2, 5, 15, 20, 22, 24, 27, 30, 39, 40, 46]
+[2m2026-10-11T04:11:49.221522Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m Run 2 drops: [1, 2, 5, 15, 20, 22, 24, 27, 30, 39, 40, 46]
+[2m2026-10-11T04:11:49.221532Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m ✅ Seed reproducibility verified
+test test_chaos_channel_seed_reproducibility ... ok
+[2m2026-10-11T04:11:49.221689Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m Sent: 100, Dropped: 27 (27%), Received: 73 (73%), Effective w/ redundancy: 145.8%
+[2m2026-10-11T04:11:49.221699Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m Sent: 100 packets, Received: 100 packets, Loss: 0%
+[2m2026-10-11T04:11:49.221704Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m ✅ Redundancy-aware test: packet recovery with loss demonstrated
+[2m2026-10-11T04:11:49.221709Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m 🎉 GATE G2: 0% LOSS TEST PASSED
+[2m2026-10-11T04:11:49.221713Z[0m [32m INFO[0m [2mchaos_network_channel[0m[2m:[0m 🎉 GATE G2: 30% LOSS TEST PASSED (with caveats)
+test test_5frame_redundancy_survives_0pct_loss ... ok
+test test_5frame_redundancy_survives_30pct_loss ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/feature_flags_test.rs (target/debug/deps/feature_flags_test-819bc64a1105bd04)
+
+running 6 tests
+test test_feature_flags_all_flags_exist ... ok
+test test_feature_flags_no_auto_action_on_enable ... ok
+test test_feature_flags_missing_defaults_to_false ... ok
+test test_feature_flags_can_be_enabled ... ok
+test test_feature_flags_invalid_type_rejected ... ok
+test test_feature_flags_default_all_off ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fuzz_decoder.rs (target/debug/deps/fuzz_decoder-569909537f6ce7bf)
+
+running 1 test
+test test_10000_packet_decoder_fuzz ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.69s
+
+     Running tests/golden_test.rs (target/debug/deps/golden_test-2f6ef92c011d5ce6)
+
+running 1 test
+test test_golden_replay_milestones ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/integration_2client_udp.rs (target/debug/deps/integration_2client_udp-397998eecbecb06a)
+
+running 4 tests
+[2m2026-10-11T04:11:51.031000Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m === GATE G2/G3: UDP Handshake & Message Exchange ===
+[2m2026-10-11T04:11:51.031005Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m === GATE G1: Version Mismatch Rejection ===
+[2m2026-10-11T04:11:51.031011Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m === GATE G2: 100-Tick Convergence Test ===
+[2m2026-10-11T04:11:51.031000Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m === GATE G2/G3: InputFrame + StateAck Exchange ===
+[2m2026-10-11T04:11:51.031148Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Client sent InputFrame with 5-frame redundancy (42 bytes)
+[2m2026-10-11T04:11:51.031097Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Server bound to: 127.0.0.1:52780
+[2m2026-10-11T04:11:51.031148Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Sent Handshake with version 99.0
+[2m2026-10-11T04:11:51.031195Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Client A bound to: 127.0.0.1:60888
+[2m2026-10-11T04:11:51.031197Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Server received version mismatch attempt from 127.0.0.1:49565
+[2m2026-10-11T04:11:51.031194Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Server received InputFrame from 127.0.0.1:56526 (42 bytes)
+[2m2026-10-11T04:11:51.031209Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ (Server would send Error 421 in real impl)
+[2m2026-10-11T04:11:51.031218Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m 🎉 VERSION MISMATCH TEST PASSED
+[2m2026-10-11T04:11:51.031232Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Server sent StateAck with checksum CDAB8924
+[2m2026-10-11T04:11:51.031235Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Client A sent handshake (8 bytes)
+[2m2026-10-11T04:11:51.031248Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Received checksum bytes: 24 89 AB CD
+[2m2026-10-11T04:11:51.031257Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Expected checksum: CDAB8924, Received: CDAB8924
+[2m2026-10-11T04:11:51.031259Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Server received handshake from 127.0.0.1:60888
+[2m2026-10-11T04:11:51.031266Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Client received StateAck with matching checksum CDAB8924
+[2m2026-10-11T04:11:51.031276Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m 🎉 INPUTFRAME + STATEACK TEST PASSED
+[2m2026-10-11T04:11:51.031301Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Server sent HandshakeAck (12 bytes)
+[2m2026-10-11T04:11:51.031321Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m ✅ Client A received HandshakeAck
+[2m2026-10-11T04:11:51.031331Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m 🎉 UDP HANDSHAKE TEST PASSED
+test test_version_mismatch_rejection ... ok
+test test_2client_input_frame_exchange ... ok
+test test_2client_udp_handshake_basic ... ok
+[2m2026-10-11T04:11:51.032377Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Tick 20: A checksums=20, B checksums=20
+[2m2026-10-11T04:11:51.033361Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Tick 40: A checksums=40, B checksums=40
+[2m2026-10-11T04:11:51.034376Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Tick 60: A checksums=60, B checksums=60
+[2m2026-10-11T04:11:51.035534Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Tick 80: A checksums=80, B checksums=80
+[2m2026-10-11T04:11:51.036912Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Tick 100: A checksums=100, B checksums=100
+[2m2026-10-11T04:11:51.036927Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m Final: A=100 checksums, B=100 checksums
+[2m2026-10-11T04:11:51.036936Z[0m [32m INFO[0m [2mintegration_2client_udp[0m[2m:[0m 🎉 100-TICK CONVERGENCE TEST PASSED
+test test_protocol_convergence_100_ticks ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/lobby_test.rs (target/debug/deps/lobby_test-26618591730a69b8)
+
+running 8 tests
+test test_create_lobby ... ok
+test test_join_lobby ... ok
+test test_auto_start ... ok
+test test_idempotent_ready ... ok
+test test_ready_timeout ... ok
+test test_leave_lobby ... ok
+test test_ready_all ... ok
+test test_concurrent_joins ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/module_isolation_test.rs (target/debug/deps/module_isolation_test-dc6a3004de38f606)
+
+running 1 test
+test test_module_boundary_isolation ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/multiprocess_chaos_test.rs (target/debug/deps/multiprocess_chaos_test-8ee1ee104319b53d)
+
+running 2 tests
+test test_multiprocess_udp_0pct_loss ... ok
+test test_multiprocess_udp_30pct_loss ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/postgres_redis_integration.rs (target/debug/deps/postgres_redis_integration-f650d1abce743523)
+
+running 9 tests
+test test_graceful_degradation_redis_offline ... ok
+test test_redis_ordered_queue_atomic_enqueue ... ok
+test test_redis_concurrent_enqueue_same_player ... ok
+test test_migration_from_empty_schema ... FAILED
+test test_sessions_crud_and_heartbeat_orphan_detection ... FAILED
+test test_matches_crud_and_cascade ... FAILED
+test test_users_crud_and_constraints ... FAILED
+test test_multiple_connections_same_data ... FAILED
+test test_redis_ttl_expiry ... ok
+
+failures:
+
+---- test_migration_from_empty_schema stdout ----
+
+thread 'test_migration_from_empty_schema' (27282838) panicked at tests/postgres_redis_integration.rs:89:19:
+Connection failed: error returned from database: password authentication failed for user "postgres"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- test_sessions_crud_and_heartbeat_orphan_detection stdout ----
+
+thread 'test_sessions_crud_and_heartbeat_orphan_detection' (27282843) panicked at tests/postgres_redis_integration.rs:312:19:
+Connection failed: error returned from database: password authentication failed for user "postgres"
+
+---- test_matches_crud_and_cascade stdout ----
+
+thread 'test_matches_crud_and_cascade' (27282837) panicked at tests/postgres_redis_integration.rs:226:19:
+Connection failed: error returned from database: password authentication failed for user "postgres"
+
+---- test_users_crud_and_constraints stdout ----
+
+thread 'test_users_crud_and_constraints' (27282852) panicked at tests/postgres_redis_integration.rs:144:19:
+Connection failed: error returned from database: password authentication failed for user "postgres"
+
+---- test_multiple_connections_same_data stdout ----
+
+thread 'test_multiple_connections_same_data' (27282839) panicked at tests/postgres_redis_integration.rs:690:19:
+Connection failed: error returned from database: password authentication failed for user "postgres"
+
+
+failures:
+    test_matches_crud_and_cascade
+    test_migration_from_empty_schema
+    test_multiple_connections_same_data
+    test_sessions_crud_and_heartbeat_orphan_detection
+    test_users_crud_and_constraints
+
+test result: FAILED. 4 passed; 5 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.14s
+
+
+========== TEST SUMMARY ==========
+passed 4, skipped 0
+==================================
+
+error: test failed, to rerun pass `--test postgres_redis_integration`

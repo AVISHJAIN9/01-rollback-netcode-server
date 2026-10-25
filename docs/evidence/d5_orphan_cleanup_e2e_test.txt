@@ -1,0 +1,30 @@
+test network::drop_model::tests::test_drop_model_30pct_loss ... ok
+test network::rate_limiter::tests::test_above_limit_blocked ... ok
+test network::rate_limiter::tests::test_below_limit_allowed ... ok
+test network::rate_limiter::tests::test_independent_ips ... ok
+test protocol::sequence::tests::test_monotonic_sequence_accepted ... ok
+test protocol::sequence::tests::test_multiple_players_independent ... ok
+test protocol::sequence::tests::test_old_sequence_rejected ... ok
+test protocol::sequence::tests::test_replay_rejected ... ok
+test session::cleanup::tests::test_heartbeat_refresh ... ok
+test session::cleanup::tests::test_active_session_not_stale ... ok
+test session::cleanup::tests::test_mark_stale_after_40s ... ok
+test network::lossy_transport::tests::test_lossy_transport_30pct_loss ... ok
+test session::matchmaking::tests::test_dequeue_maintains_order ... ok
+test session::matchmaking::tests::test_concurrent_enqueue ... ok
+test session::matchmaking::tests::test_queue_size ... ok
+test session::matchmaking::tests::test_inmemory_fifo ... ok
+test auth::tests::test_expired_token_rejected ... ok
+
+test result: ok. 48 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/d5_orphan_cleanup_e2e_test.rs (target/debug/deps/d5_orphan_cleanup_e2e_test-6c35bfe985de8cd4)
+
+running 4 tests
+test test_stale_sessions_detected ... ok
+test test_heartbeat_refresh_prevents_stale ... ok
+test test_active_sessions_preserved ... ok
+test test_mixed_stale_and_active ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

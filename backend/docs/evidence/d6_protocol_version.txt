@@ -1,0 +1,35 @@
+warning: unused variable: `player_id`
+  --> src/session/matchmaking.rs:58:29
+   |
+58 | ...&self, player_id: Uuid) -> R...
+   |           ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_player_id`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rollback-netcode-server` (lib) generated 1 warning (run `cargo fix --lib -p rollback-netcode-server` to apply 1 suggestion)
+   Compiling rollback-netcode-server v0.1.0 (/Users/avishjain/avishjain9-repos/01-rollback-netcode-server/backend)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.94s
+warning: the following packages contain code that will be rejected by a future version of Rust: sqlx-postgres v0.7.4
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 3`
+     Running tests/d6_protocol_version_test.rs (target/debug/deps/d6_protocol_version_test-56f1f3720c8cae20)
+
+running 7 tests
+✓ Far-future version (255) rejected
+✓ Negotiation is idempotent across multiple calls
+✓ Version 0 rejected with VersionMismatch error
+  Error details: client=0, expected min=1, max=1
+✓ All out-of-range versions correctly rejected
+✓ Version 1.0 accepted
+✓ Error message: Unsupported protocol version: client requested 3, server supports 1..=1
+✓ Version 2 rejected with VersionMismatch error
+  Error details: client=2, expected min=1, max=1
+test test_negotiation_idempotent ... ok
+test test_future_version_rejected ... ok
+test test_v0_9_rejected ... ok
+test test_out_of_range_versions ... ok
+test test_v1_0_accepted ... ok
+test test_version_error_message ... ok
+test test_v2_0_rejected ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

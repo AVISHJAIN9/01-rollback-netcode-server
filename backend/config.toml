@@ -1,0 +1,42 @@
+# Rollback Netcode Server Configuration
+# Override values with environment variables: ROLLBACK_*
+
+[server]
+# Tick rate in Hz (default 60)
+tick_rate = 60
+
+# Reconnect timeout in seconds (default 30)
+reconnect_timeout_secs = 30
+
+# Stale session detection threshold in seconds (default 40)
+stale_session_threshold_secs = 40
+
+[ports]
+# UDP game server port (default 7777)
+udp_game = 7777
+
+# HTTP admin/metrics port (default 8080)
+http_admin = 8080
+
+# Frontend WebSocket port (default 3000)
+frontend = 3000
+
+[database]
+# Postgres connection URL
+postgres_url = "postgres://postgres:postgrespassword@localhost:5432/rollback_db"
+
+# Redis connection URL
+redis_url = "redis://localhost:6379/0"
+
+[features]
+# ML-based cheat detection (default false)
+enable_ai_cheat_detection = false
+
+# Kalman filter jitter prediction (default false)
+enable_jitter_prediction = false
+
+# Observability for rollback risk (default false)
+enable_rollback_risk_metrics = false
+
+# AI-driven matchmaking optimizer (default false)
+enable_matchmaking_optimizer = false

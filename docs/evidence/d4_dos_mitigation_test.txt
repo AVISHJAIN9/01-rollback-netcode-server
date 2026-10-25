@@ -1,0 +1,30 @@
+test protocol::sequence::tests::test_monotonic_sequence_accepted ... ok
+test network::rate_limiter::tests::test_independent_ips ... ok
+test network::drop_model::tests::test_drop_model_30pct_loss ... ok
+test network::rate_limiter::tests::test_below_limit_allowed ... ok
+test protocol::sequence::tests::test_multiple_players_independent ... ok
+test protocol::sequence::tests::test_old_sequence_rejected ... ok
+test protocol::sequence::tests::test_replay_rejected ... ok
+test session::cleanup::tests::test_active_session_not_stale ... ok
+test network::lossy_transport::tests::test_lossy_transport_30pct_loss ... ok
+test session::cleanup::tests::test_heartbeat_refresh ... ok
+test session::cleanup::tests::test_mark_stale_after_40s ... ok
+test session::matchmaking::tests::test_dequeue_maintains_order ... ok
+test session::matchmaking::tests::test_inmemory_fifo ... ok
+test session::matchmaking::tests::test_concurrent_enqueue ... ok
+test session::matchmaking::tests::test_queue_size ... ok
+test auth::tests::test_expired_token_rejected ... ok
+
+test result: ok. 48 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/d4_dos_mitigation_test.rs (target/debug/deps/d4_dos_mitigation_test-2ea351b715d60f44)
+
+running 5 tests
+test test_below_limit_allowed ... ok
+test test_burst_rejection ... ok
+test test_different_ips_independent ... ok
+test test_above_limit_blocked ... ok
+test test_rate_limit_counter ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

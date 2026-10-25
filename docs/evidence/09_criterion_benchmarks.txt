@@ -1,0 +1,113 @@
+warning: unused variable: `t`
+  --> ../benchmarks/benches/simulation_bench.rs:25:21
+   |
+25 |                 for t in 1..=depth {
+   |                     ^ help: if this is intentional, prefix it with an underscore: `_t`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rollback-netcode-server` (bench "simulation_bench") generated 1 warning (run `cargo fix --bench "simulation_bench" -p rollback-netcode-server` to apply 1 suggestion)
+    Finished `bench` profile [optimized] target(s) in 0.18s
+     Running unittests src/lib.rs (target/release/deps/rollback_netcode_server-2433094fbd6b2391)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/release/deps/rollback_netcode_server-1c85416ce5bb28ca)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running ../benchmarks/benches/simulation_bench.rs (target/release/deps/simulation_bench-645c26c33d6d7d52)
+Gnuplot not found, using plotters backend
+Benchmarking simulation_step
+Benchmarking simulation_step: Warming up for 3.0000 s
+Benchmarking simulation_step: Collecting 100 samples in estimated 5.0000 s (619M iterations)
+Benchmarking simulation_step: Analyzing
+simulation_step         time:   [7.1727 ns 7.8211 ns 8.5534 ns]
+                        change: [-56.475% -51.258% -45.297%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Found 10 outliers among 100 measurements (10.00%)
+  3 (3.00%) high mild
+  7 (7.00%) high severe
+
+Benchmarking snapshot_save
+Benchmarking snapshot_save: Warming up for 3.0000 s
+Benchmarking snapshot_save: Collecting 100 samples in estimated 5.0007 s (15M iterations)
+Benchmarking snapshot_save: Analyzing
+snapshot_save           time:   [326.61 ns 338.56 ns 354.24 ns]
+                        change: [-37.413% -29.827% -21.147%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Found 11 outliers among 100 measurements (11.00%)
+  2 (2.00%) high mild
+  9 (9.00%) high severe
+
+Benchmarking snapshot_restore
+Benchmarking snapshot_restore: Warming up for 3.0000 s
+Benchmarking snapshot_restore: Collecting 100 samples in estimated 5.0000 s (2.2B iterations)
+Benchmarking snapshot_restore: Analyzing
+snapshot_restore        time:   [2.0525 ns 2.1712 ns 2.3161 ns]
+                        change: [-25.204% -19.651% -13.468%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Found 12 outliers among 100 measurements (12.00%)
+  1 (1.00%) low mild
+  1 (1.00%) high mild
+  10 (10.00%) high severe
+
+Benchmarking resimulation_depth_1
+Benchmarking resimulation_depth_1: Warming up for 3.0000 s
+Benchmarking resimulation_depth_1: Collecting 100 samples in estimated 5.0011 s (4.6M iterations)
+Benchmarking resimulation_depth_1: Analyzing
+resimulation_depth_1    time:   [1.0524 µs 1.0627 µs 1.0764 µs]
+                        change: [-44.616% -33.866% -23.811%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Found 9 outliers among 100 measurements (9.00%)
+  3 (3.00%) high mild
+  6 (6.00%) high severe
+
+Benchmarking resimulation_depth_2
+Benchmarking resimulation_depth_2: Warming up for 3.0000 s
+Benchmarking resimulation_depth_2: Collecting 100 samples in estimated 5.0055 s (2.7M iterations)
+Benchmarking resimulation_depth_2: Analyzing
+resimulation_depth_2    time:   [1.8394 µs 1.8556 µs 1.8818 µs]
+                        change: [-21.261% -14.967% -8.1592%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Found 17 outliers among 100 measurements (17.00%)
+  5 (5.00%) low mild
+  8 (8.00%) high mild
+  4 (4.00%) high severe
+
+Benchmarking resimulation_depth_4
+Benchmarking resimulation_depth_4: Warming up for 3.0000 s
+Benchmarking resimulation_depth_4: Collecting 100 samples in estimated 5.0040 s (1.5M iterations)
+Benchmarking resimulation_depth_4: Analyzing
+resimulation_depth_4    time:   [3.4563 µs 3.5230 µs 3.6186 µs]
+                        change: [-4.6685% +0.2152% +3.7048%] (p = 0.94 > 0.05)
+                        No change in performance detected.
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+
+Benchmarking resimulation_depth_8
+Benchmarking resimulation_depth_8: Warming up for 3.0000 s
+Benchmarking resimulation_depth_8: Collecting 100 samples in estimated 5.0062 s (813k iterations)
+Benchmarking resimulation_depth_8: Analyzing
+resimulation_depth_8    time:   [6.1402 µs 6.2814 µs 6.4830 µs]
+                        change: [-10.618% -6.5063% -2.4646%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Found 5 outliers among 100 measurements (5.00%)
+  2 (2.00%) low mild
+  3 (3.00%) high severe
+
+Benchmarking resimulation_depth_12
+Benchmarking resimulation_depth_12: Warming up for 3.0000 s
+Benchmarking resimulation_depth_12: Collecting 100 samples in estimated 5.0281 s (545k iterations)
+Benchmarking resimulation_depth_12: Analyzing
+resimulation_depth_12   time:   [8.9382 µs 9.0104 µs 9.0897 µs]
+                        change: [-28.139% -17.921% -9.3966%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) low mild
+

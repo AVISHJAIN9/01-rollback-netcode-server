@@ -1,0 +1,325 @@
+name: Mini-QUIC Observability CI/CD
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'telemetry/**'
+      - 'frontend/**'
+      - 'ai_ml/**'
+      - 'tests/**'
+      - '.github/workflows/ci.yml'
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  # Rust backend: Format, lint, security audit, test
+  rust-checks:
+    name: Rust Backend Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: telemetry
+      
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+        working-directory: telemetry
+      
+      - name: Run clippy linter
+        run: cargo clippy --all-targets --all-features -- -D warnings
+        working-directory: telemetry
+      
+      - name: Security audit
+        run: |
+          cargo install cargo-audit
+          cargo audit
+        working-directory: telemetry
+      
+      - name: Run tests
+        run: cargo test --lib --verbose
+        working-directory: telemetry
+      
+      - name: Run integration tests
+        run: cargo test --test '*' --verbose
+        working-directory: telemetry
+
+  # Database: Schema validation, migration checks
+  database-checks:
+    name: Database Schema Validation
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: mini_quic_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Run migrations
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/mini_quic_test
+        run: |
+          psql $DATABASE_URL < db/migrations/001_initial_quic_telemetry.sql
+      
+      - name: Verify schema
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/mini_quic_test
+        run: |
+          psql $DATABASE_URL -c "\dt"
+          psql $DATABASE_URL -c "\dv"
+
+  # Frontend: Type check, lint, build
+  frontend-checks:
+    name: Frontend Build & Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+      
+      - name: Install dependencies
+        run: npm install
+        working-directory: frontend
+      
+      - name: Type check
+        run: npm run type-check
+        working-directory: frontend
+      
+      - name: Run linter
+        run: npm run lint
+        working-directory: frontend
+      
+      - name: Build production
+        run: npm run build
+        working-directory: frontend
+      
+      - name: Run tests
+        run: npm run test
+        working-directory: frontend
+
+  # Python AI/ML: Format, type check, lint, unit tests
+  python-checks:
+    name: Python AI/ML Checks
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.11', '3.12']
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+      
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pytest black flake8 mypy gymnasium numpy torch
+      
+      - name: Check formatting with black
+        run: black --check ai_ml/
+      
+      - name: Lint with flake8
+        run: flake8 ai_ml/ --max-line-length=120 --ignore=E501,W503
+      
+      - name: Type check with mypy
+        run: mypy ai_ml/ --ignore-missing-imports || true
+      
+      - name: Run unit tests
+        run: pytest ai_ml/ -v
+
+  # Network simulation: E2E tests
+  e2e-network-sim:
+    name: Network Simulation Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+      
+      - name: Run network simulation tests
+        run: |
+          cargo test --test 'e2e_network_sim' --verbose
+        working-directory: tests
+        timeout-minutes: 10
+
+  # Integration: Docker compose setup
+  integration-test:
+    name: Full Stack Integration Test
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: mini_quic
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Initialize database
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/mini_quic
+        run: psql $DATABASE_URL < db/migrations/001_initial_quic_telemetry.sql
+      
+      - name: Build frontend
+        run: |
+          cd frontend && npm install && npm run build
+      
+      - name: Build Rust telemetry
+        run: |
+          cd telemetry && cargo build --release
+      
+      - name: Run integration tests
+        run: |
+          cd tests && cargo test --release
+        timeout-minutes: 15
+
+  # Security scanning
+  security:
+    name: Security Scanning
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+      
+      - name: Upload Trivy results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+      
+      - name: Dependency check
+        run: |
+          pip install safety
+          safety check --json || true
+
+  # Code coverage
+  coverage:
+    name: Code Coverage Report
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      
+      - name: Install tarpaulin
+        run: cargo install cargo-tarpaulin
+      
+      - name: Generate coverage
+        run: |
+          cd telemetry
+          cargo tarpaulin --out Xml --output-dir ../coverage
+      
+      - name: Upload to codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/cobertura.xml
+          flags: rust
+          fail_ci_if_error: false
+
+  # Build Docker image
+  docker-build:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: mini-quic:latest
+          cache-from: type=registry,ref=mini-quic:buildcache
+          cache-to: type=registry,ref=mini-quic:buildcache,mode=max
+
+  # Notify on completion
+  notify:
+    name: Notification
+    runs-on: ubuntu-latest
+    needs: [rust-checks, frontend-checks, python-checks, e2e-network-sim]
+    if: always()
+    steps:
+      - name: Check job status
+        run: |
+          if [ "${{ needs.rust-checks.result }}" != "success" ]; then
+            echo "❌ Rust checks failed"
+            exit 1
+          fi
+          if [ "${{ needs.frontend-checks.result }}" != "success" ]; then
+            echo "❌ Frontend checks failed"
+            exit 1
+          fi
+          if [ "${{ needs.python-checks.result }}" != "success" ]; then
+            echo "❌ Python checks failed"
+            exit 1
+          fi
+          echo "✅ All checks passed"
