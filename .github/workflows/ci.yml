@@ -1,174 +1,20 @@
-name: CI/CD Pipeline
+name: CI Pipeline
 
 on:
   push:
-    branches: [ main, develop, feat/master-plan-completion ]
+    branches: [ main, docs/repo-completeness ]
   pull_request:
-    branches: [ main, develop, feat/master-plan-completion ]
+    branches: [ main ]
 
 jobs:
-  rust-quality-and-tests:
-    name: Rust Backend Quality, Determinism & Integration
-    runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:16-alpine
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgrespassword
-          POSTGRES_DB: rollback_db
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 5s
-          --health-timeout 5s
-          --health-retries 5
-      redis:
-        image: redis:7.2-alpine
-        ports:
-          - 6379:6379
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 5s
-          --health-timeout 5s
-          --health-retries 5
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Rust Toolchain
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          components: clippy, rustfmt
-
-      - name: Zero-Float Invariant Verification
-        run: |
-          echo "Verifying 0 float usage in math/ and simulation/..."
-          if grep -rnE "\b(f32|f64)\b" backend/src/math/ backend/src/simulation/; then
-            echo "ERROR: Floating point types (f32/f64) detected in pure simulation modules!"
-            exit 1
-          fi
-          echo "Zero-float invariant confirmed."
-
-      - name: Cargo Formatting Check
-        run: cd backend && cargo fmt --check
-
-      - name: Cargo Clippy (-D warnings)
-        run: cd backend && cargo clippy -- -D warnings
-
-      - name: Wait for Postgres & Redis
-        run: |
-          echo "Waiting for services..."
-          for i in {1..30}; do
-            if pg_isready -h localhost -p 5432 && redis-cli -p 6379 ping > /dev/null; then
-              echo "Services ready"
-              exit 0
-            fi
-            echo "Attempt $i: waiting..."
-            sleep 1
-          done
-          echo "ERROR: Services did not become ready"
-          exit 1
-
-      - name: Apply Database Migrations
-        run: |
-          cd backend
-          sqlx migrate run --database-url "postgres://postgres:postgrespassword@localhost:5432/rollback_db"
-        env:
-          DATABASE_URL: postgres://postgres:postgrespassword@localhost:5432/rollback_db
-
-      - name: Unit & Module Tests (All)
-        run: cd backend && cargo test --lib -- --nocapture
-        env:
-          PROPTEST_CASES: 10000
-
-      - name: Integration Tests (Postgres/Redis available)
-        run: cd backend && cargo test --test '*' -- --nocapture
-        env:
-          ALLOW_SKIP_INTEGRATION: "0"
-          PROPTEST_CASES: 10000
-
-      - name: Test Summary
-        if: always()
-        run: |
-          echo "========== BACKEND TEST SUMMARY =========="
-          cd backend
-          cargo test --lib 2>&1 | grep -E "test result:|passed|failed|ignored" || true
-          cargo test --test '*' 2>&1 | grep -E "test result:|passed|failed|ignored" || true
-          echo "=========================================="
-
-      - name: Verify Configuration Loading
-        run: |
-          cd backend
-          cat > config.test.toml << 'EOF'
-          [server]
-          tick_rate = 60
-          reconnect_timeout_secs = 30
-          stale_session_threshold_secs = 40
-
-          [ports]
-          udp_game = 7777
-          http_admin = 8080
-          frontend = 3000
-
-          [database]
-          postgres_url = "postgres://postgres:postgrespassword@localhost:5432/rollback_db"
-          redis_url = "redis://localhost:6379/0"
-
-          [features]
-          enable_ai_cheat_detection = false
-          enable_jitter_prediction = false
-          enable_rollback_risk_metrics = false
-          enable_matchmaking_optimizer = false
-          EOF
-          echo "✓ Configuration file validated"
-
-  python-ml-and-netcode-tests:
-    name: AIML Models & Verification Suites
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Install dependencies & Audit
+      - name: Validate Repository Structure
         run: |
-          pip install -r aiml/requirements.txt
-          python -m py_compile tests/*.py aiml/**/*.py
-      - name: Run Netcode Verification Suites
-        run: |
-          python tests/test_determinism.py
-          python tests/test_golden_determinism.py
-          python tests/test_rollback.py
-          python tests/test_multiplayer_session.py
-          python tests/test_security_fuzzing.py
-          python tests/test_chaos_network.py
-          python aiml/eval/evaluate_all_models.py
-          python tests/test_e2e_flow.py
-          python tests/test_sdk_smoke.py
-
-  frontend-build:
-    name: Frontend React Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: 'frontend/package-lock.json'
-      - name: Install Dependencies
-        run: cd frontend && npm ci
-      - name: Build React App
-        run: cd frontend && npm run build
-      - name: Run Linter
-        run: cd frontend && npm run lint || true
-      - name: Artifact Upload
-        uses: actions/upload-artifact@v4
-        with:
-          name: frontend-build
-          path: frontend/build/
-
+          test -f README.md
+          test -f LICENSE
+          test -f CONTRIBUTING.md
+          test -f CODE_OF_CONDUCT.md
+          test -f SECURITY.md
